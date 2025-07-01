@@ -14,6 +14,6 @@ beforeEach(() => {
 //test_cases
 describe("Filters Testing", () => {
   it("Search by Business Name", () => {
-    filters.area("Abu Dhabi Int'l Airport","Abu Samrah");
+    filters.client_type("Dealership - Sales Agent","Freelancer");
   });
 });

@@ -34,6 +34,11 @@ class Filters {
       .within(() => {
         cy.get("td").then((cells) => {
           const found = [...cells].some((cell) => cell.innerText.includes(val));
+          if (found) {
+            cy.log("Verified in the table: " + val);
+          } else {
+            cy.log("Not Matched: " + val);
+          }
         });
       });
     cy.get(".chip-value").should("contain", val);
@@ -52,10 +57,17 @@ class Filters {
       .within(() => {
         cy.get("td").then((cells) => {
           const found = [...cells].some((cell) => cell.innerText.includes(val));
+          if (found) {
+            cy.log("Verified in the table: " + val);
+          } else {
+            cy.log("Not Matched: " + val);
+          }
         });
       });
     cy.get(".chip-value").should("contain", val);
   }
+
+  //multi_select
   //area
   area(...val) {
     cy.visit(
@@ -74,6 +86,20 @@ class Filters {
         .click();
     });
     cy.contains("button", "Apply Filters").click();
+    cy.get("tbody")
+      .should("be.visible")
+      .within(() => {
+        val.forEach((i) => {
+          cy.get("td").then((cells) => {
+            const found = [...cells].some((cell) => cell.innerText.includes(i));
+            if (found) {
+              cy.log("Verified in the table: " + i);
+            } else {
+              cy.log("Not Matched: " + i);
+            }
+          });
+        });
+      });
     val.forEach((i) => {
       cy.get(".chip-value").should("contain", i);
     });
@@ -96,6 +122,23 @@ class Filters {
       cy.get(".rc-virtual-list-holder-inner").contains(i).click();
     });
     cy.contains("button", "Apply Filters").click();
+        cy.get("tbody")
+      .should("be.visible")
+      .within(() => {
+        val.forEach((i) => {
+          cy.get("td").then((cells) => {
+            const found = [...cells].some((cell) => cell.innerText.includes(i));
+            if (found) {
+              cy.log("Verified in the table: " + i);
+            } else {
+              cy.log("Not Matched: " + i);
+            }
+          });
+        });
+      });
+    val.forEach((i) => {
+      cy.get(".chip-value").should("contain", i);
+    });
   }
 
   //client_category
@@ -114,7 +157,20 @@ class Filters {
     });
 
     cy.contains("button", "Apply Filters").click();
-    //chips
+        cy.get("tbody")
+      .should("be.visible")
+      .within(() => {
+        val.forEach((i) => {
+          cy.get("td").then((cells) => {
+            const found = [...cells].some((cell) => cell.innerText.includes(i));
+            if (found) {
+              cy.log("Verified in the table: " + i);
+            } else {
+              cy.log("Not Matched: " + i);
+            }
+          });
+        });
+      });
     val.forEach((i) => {
       cy.get(".chip-value").should("contain", i);
     });
