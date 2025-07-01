@@ -56,28 +56,68 @@ class Filters {
       });
     cy.get(".chip-value").should("contain", val);
   }
-
   //area
   area(...val) {
     cy.visit(
       "https://prelivev2-vas-uae-affiliates.jarvisempg.com/admin/crm/clients"
     );
     cy.wait(3000);
-
     cy.contains("More Filters").click();
-
     cy.contains("span.ant-select-selection-placeholder", "Search by Area")
       .parents(".ant-select")
       .click();
-
-    val.forEach((areaName) => {
+    val.forEach((i) => {
+      cy.log(i);
       cy.get(".ant-select-tree-list-holder-inner")
         .find(".ant-select-tree-treenode")
-        .contains(areaName)
-        .click({ force: true });
+        .contains(i)
+        .click();
+    });
+    cy.contains("button", "Apply Filters").click();
+    val.forEach((i) => {
+      cy.get(".chip-value").should("contain", i);
+    });
+  }
+  //client_type
+  client_type(...val) {
+    cy.visit(
+      "https://prelivev2-vas-uae-affiliates.jarvisempg.com/admin/crm/clients"
+    );
+    cy.wait(3000);
+    cy.contains("More Filters").click();
+    cy.contains(
+      "span.ant-select-selection-placeholder",
+      "Search by Client Type"
+    )
+      .parents(".ant-select")
+      .find(".ant-select-selector")
+      .click();
+    val.forEach((i) => {
+      cy.get(".rc-virtual-list-holder-inner").contains(i).click();
+    });
+    cy.contains("button", "Apply Filters").click();
+  }
+
+  //client_category
+  client_category(...val) {
+    cy.visit(
+      "https://prelivev2-vas-uae-affiliates.jarvisempg.com/admin/crm/clients"
+    );
+    cy.wait(3000);
+    cy.contains("More Filters").click();
+    cy.contains("span.ant-select-selection-placeholder", "Search by Category")
+      .parents(".ant-select") // Go up to the full dropdown container
+      .find(".ant-select-selector") // Find the clickable wrapper
+      .click();
+    val.forEach((i) => {
+      cy.get(".rc-virtual-list-holder").contains(i).click();
     });
 
     cy.contains("button", "Apply Filters").click();
+    //chips
+    val.forEach((i) => {
+      cy.get(".chip-value").should("contain", i);
+    });
   }
 }
 

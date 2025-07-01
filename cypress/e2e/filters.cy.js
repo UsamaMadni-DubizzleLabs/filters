@@ -14,10 +14,6 @@ beforeEach(() => {
 //test_cases
 describe("Filters Testing", () => {
   it("Search by Business Name", () => {
-    filters.area(
-      "Abu Dhabi International Airport",
-      "Abu Dhabi Golf & Equestrian Club",
-      "Abu Dhabi Island"
-    );
+    filters.area("Abu Dhabi Int'l Airport","Abu Samrah");
   });
 });
